@@ -1,0 +1,113 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
+const email = 'travis@travismurdock.com';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Travis Murdock</title>
+    <meta name="description" content="Travis Murdock — Storyteller and Builder" />
+    <meta property="og:title" content="Travis Murdock" />
+    <meta property="og:description" content="Storyteller and Builder" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://travismurdock.com/" />
+    <link rel="canonical" href="https://travismurdock.com/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <main>
+      <Image
+        src={logo}
+        alt="Travis Murdock — Storyteller and Builder"
+        widths={[400, 800, 1200, 1600]}
+        sizes="(max-width: 640px) 92vw, (max-width: 1024px) 70vw, 800px"
+        loading="eager"
+        decoding="async"
+        format="webp"
+        class="logo"
+      />
+      <a class="email" href={`mailto:${email}`}>{email}</a>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: light;
+    --ink: #111;
+    --muted: #555;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #fff;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  main {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding: 2rem 1.25rem;
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+  }
+
+  .email {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid transparent;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+
+  .email:hover,
+  .email:focus-visible {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+    outline: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --ink: #f4f4f4;
+      --muted: #b6b6b6;
+    }
+    html,
+    body {
+      background: #0b0b0b;
+    }
+    .logo {
+      filter: invert(1);
+    }
+  }
+</style>
