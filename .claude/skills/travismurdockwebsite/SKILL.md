@@ -1,15 +1,18 @@
 ---
 name: travismurdockwebsite
-description: Operating manual for travismurdock.com — Travis Murdock's personal website. Use when Travis asks to change, deploy, redeploy, debug, monitor, or take down travismurdock.com, or when he asks about its hosting, DNS, certificate, IAM role, GitHub repo, or build pipeline. Self-contained; does not depend on the EGG team.
+description: Operating manual for travismurdock.com — Travis Murdock's personal website AND the three redirect domains (travismurdock.net, travismurdock.online, travisrmurdock.com). Use when Travis asks to change, deploy, redeploy, debug, monitor, or take down any of these, or when he asks about hosting, DNS, certificates, IAM, GitHub repo, build pipeline, or domain redirects. Self-contained; does not depend on the EGG team.
 owner: Travis Murdock (travis@travismurdock.com)
 created: 2026-05-27
+updated: 2026-05-29
 ---
 
 # travismurdock.com — operations skill
 
 Single-page personal site. Signature logo + mailto link. Astro 6 static export → AWS Amplify Hosting → CloudFront. Pushes to `main` auto-deploy in ~45 seconds.
 
-**Live:** https://travismurdock.com and https://www.travismurdock.com (HTTPS, Amazon-managed cert auto-renews)
+**Live:**
+- https://travismurdock.com and https://www.travismurdock.com (canonical site, HTTPS, Amazon-managed cert auto-renews)
+- https://travismurdock.net / .online / https://travisrmurdock.com → all 301 redirect to https://travismurdock.com/ (S3+CloudFront, HTTPS)
 
 ---
 
@@ -20,11 +23,12 @@ Single-page personal site. Signature logo + mailto link. Astro 6 static export �
 | Source repo (GitHub, public) | https://github.com/travisrmurdock/travismurdock.com |
 | Local working copy (Travis's Mac) | `~/code/travismurdock.com` |
 | Amplify app (us-west-2) | `d2m15nxpbp2cbt` — https://us-west-2.console.aws.amazon.com/amplify/apps/d2m15nxpbp2cbt |
-| Route 53 hosted zone | `Z10106222RMKMU12D5NGK` (in Travis's AWS account `727361761616`) |
-| TLS cert | Amazon-managed via ACM, attached to Amplify domain, wildcard `*.travismurdock.com` |
-| IAM role for DNS writes | `AWSAmplifyDomainRole-Z10106222RMKMU12D5NGK` — only Route 53 perms on that one zone, trusted by `amplify.amazonaws.com` |
+| Route 53 hosted zone (main site) | `Z10106222RMKMU12D5NGK` (in Travis's AWS account `727361761616`) |
+| TLS cert (main site) | Amazon-managed via ACM, attached to Amplify domain, wildcard `*.travismurdock.com` |
+| IAM role for Amplify DNS writes | `AWSAmplifyDomainRole-Z10106222RMKMU12D5NGK` — only Route 53 perms on that one zone, trusted by `amplify.amazonaws.com` |
 | AWS account | `travis@travismurdock.com` root login — account ID **727361761616** |
-| Domain registrar | Register.com / Network Solutions — expires **2027-12-02** (no action needed; NS already point at Route 53 in this account) |
+| Local AWS CLI access | IAM user `travis-cli` (AdministratorAccess); access key in 1Password "AWS travis-cli"; configured at `~/.aws/credentials` |
+| Domain registrar | Register.com / Network Solutions — all 4 domains. Login `travism1` (creds in 1Password "register.com"). All renewals on auto-renew. |
 
 ---
 
@@ -181,7 +185,47 @@ Auto-detected by Amplify; produces static files in `dist/` which Amplify serves 
 
 ---
 
-## 9. What this skill does NOT cover
+## 9. Redirect domains (travismurdock.net, .online, travisrmurdock.com)
+
+Three secondary domains redirect to `https://travismurdock.com/` via S3+CloudFront. Built 2026-05-29.
+
+| Domain | Route 53 zone | ACM cert (us-east-1) | S3 redirect bucket | CloudFront distribution | Renewal |
+|---|---|---|---|---|---|
+| travismurdock.net | `Z046425312RL1SODL4PTK` | `288cd107-9f3d-4018-b434-def576c95deb` | `redirect.travismurdock.net` | `E3SG2SXA02S2MD` (d1wbu8ml8a4xyk.cloudfront.net) | 2026-09-05 |
+| travismurdock.online | `Z05455351KMQ834MTPJTQ` | `5c1f5016-273a-4754-be5b-a7fabc5de8fc` | `redirect.travismurdock.online` | `E1WRVBE9J9XSBZ` (d28t2c4e387e2e.cloudfront.net) | 2027-02-02 |
+| travisrmurdock.com (typo defense) | `Z05448301J45M9AF3WBBQ` | `69e4149e-eee3-4ede-bd24-ad80f11143d5` | `redirect.travisrmurdock.com` | `E3HTY2OQ2FLS3M` (d1y4zbi3b3ve69.cloudfront.net) | 2027-02-15 |
+
+**Architecture** (same pattern for all 3):
+1. S3 bucket `redirect.<domain>` — website hosting configured with `RedirectAllRequestsTo` `https://travismurdock.com`, all public access blocked
+2. CloudFront distribution — origin is the S3 website endpoint (`<bucket>.s3-website-us-east-1.amazonaws.com`, http-only origin); viewer protocol `redirect-to-https`; viewer cert from ACM; aliases include apex + `www.`; price class 100
+3. Route 53 zone for each domain — ALIAS A records (apex + www) → CloudFront's CNAME, using CloudFront's well-known hosted zone ID `Z2FDTNDATAQYW2`
+4. Network Solutions nameservers for each domain pointed at the 4 AWS NS for that zone
+
+**Cost:** ~$1.50/mo total (3 × Route 53 zone $0.50 + ~pennies of CF traffic)
+
+### Reproducing or rebuilding
+
+Use `/tmp/redirect-progress.sh` from 2026-05-29 build as a template — it's an idempotent end-to-end driver that:
+1. Polls until NS propagates per domain
+2. Polls until ACM cert hits `ISSUED`
+3. Creates CloudFront distribution from a per-domain JSON config
+4. Polls until CF deployment is `Deployed`
+5. Writes ALIAS A records to Route 53
+6. Verifies 301 → travismurdock.com lands
+The full build for 3 fresh domains takes ~13 minutes end-to-end, dominated by ACM validation (~5 min) and CloudFront deploy (~5 min).
+
+### To take a redirect domain down
+
+1. Delete CloudFront distribution (must be disabled first, takes ~15 min to fully delete)
+2. Delete S3 bucket
+3. Delete Route 53 hosted zone
+4. Revert nameservers at Network Solutions to defaults (DNS101/102.REGISTER.COM)
+5. Delete ACM cert in us-east-1
+Or, more cheaply: just disable the CloudFront distribution. The domain stops resolving to a redirect but you keep everything for later.
+
+---
+
+## 10. What this skill does NOT cover
 
 - Email setup (Google Workspace lives outside this; see Travis's Google Admin console)
 - Other AWS resources in the account (e.g., the old EC2 at `35.164.204.112` that previously served the placeholder nginx — orphaned, can be terminated if found)
