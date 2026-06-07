@@ -1,0 +1,26 @@
+# Travis Murdock
+
+> Storyteller and Builder. Head of GTM at CopilotKit. Personal site and contact point.
+
+This is a single-page personal site. The canonical (and currently only) page is the homepage.
+
+## About
+
+Travis Murdock is the Head of Go-To-Market at [CopilotKit](https://copilotkit.ai), the open-source framework for in-app AI copilots and agents. He is also a lead mentor in the Techstars Seattle program. Based in the Greater Seattle Area.
+
+## Site contents
+
+- [Homepage](https://travismurdock.com/): Logo and contact email.
+
+## Contact
+
+travis@travismurdock.com
+
+## Profiles
+
+- LinkedIn: https://www.linkedin.com/in/travismurdock/
+- GitHub: https://github.com/travisrmurdock
+
+## Identity
+
+Structured `Person` data is embedded as JSON-LD in the homepage `<head>` for machine-readable identity.

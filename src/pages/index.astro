@@ -11,17 +11,60 @@ const email = 'travis@travismurdock.com';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>Travis Murdock</title>
-    <meta name="description" content="Travis Murdock — Storyteller and Builder" />
+    <meta name="description" content="Travis Murdock — Storyteller and Builder. Head of GTM at CopilotKit." />
+    <meta name="author" content="Travis Murdock" />
+    <meta name="creator" content="Travis Murdock" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
+
     <meta property="og:title" content="Travis Murdock" />
-    <meta property="og:description" content="Storyteller and Builder" />
-    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Storyteller and Builder. Head of GTM at CopilotKit." />
+    <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://travismurdock.com/" />
+    <meta property="og:site_name" content="Travis Murdock" />
+    <meta property="og:image" content="https://travismurdock.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Travis Murdock — Storyteller and Builder" />
+    <meta property="profile:first_name" content="Travis" />
+    <meta property="profile:last_name" content="Murdock" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Travis Murdock" />
+    <meta name="twitter:description" content="Storyteller and Builder. Head of GTM at CopilotKit." />
+    <meta name="twitter:image" content="https://travismurdock.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Travis Murdock — Storyteller and Builder" />
+
     <link rel="canonical" href="https://travismurdock.com/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Travis Murdock",
+      "givenName": "Travis",
+      "familyName": "Murdock",
+      "url": "https://travismurdock.com/",
+      "image": "https://travismurdock.com/og-image.png",
+      "email": "mailto:travis@travismurdock.com",
+      "description": "Storyteller and Builder. Head of GTM at CopilotKit.",
+      "jobTitle": "Head of GTM",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "CopilotKit",
+        "url": "https://copilotkit.ai"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/travismurdock/",
+        "https://github.com/travisrmurdock"
+      ]
+    })} />
   </head>
   <body>
     <main>
+      <h1 class="sr-only">Travis Murdock — Storyteller and Builder</h1>
       <Image
         src={logo}
         alt="Travis Murdock — Storyteller and Builder"
@@ -48,6 +91,18 @@ const email = 'travis@travismurdock.com';
   *::before,
   *::after {
     box-sizing: border-box;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   html,
