@@ -1,27 +1,37 @@
 # Travis Murdock
 
-> Storyteller and Builder. Head of GTM at CopilotKit. Personal site and contact point.
+> Head of Go-To-Market at CopilotKit. Storyteller and Builder. Personal site and contact point.
 
 This is a single-page personal site. The canonical (and currently only) page is the homepage.
 
 ## About
 
-Travis Murdock is the Head of Go-To-Market at [CopilotKit](https://copilotkit.ai), the open-source framework for in-app AI copilots and agents. He is also a lead mentor in the Techstars Seattle program. Based in the Greater Seattle Area.
+Travis Murdock is the Head of Go-To-Market at [CopilotKit](https://copilotkit.ai), the open-source framework engineers use to build in-app AI copilots and agents. He is also a lead mentor in the Techstars Seattle program. Based in the Greater Seattle Area.
+
+## Areas of expertise
+
+- AI copilots and agents
+- Go-to-market strategy for developer-focused B2B software
+- Founder-led sales
+- Open source software
+- Startup mentorship
 
 ## Site contents
 
-- [Homepage](https://travismurdock.com/): Logo and contact email.
+- [Homepage](https://travismurdock.com/): Logo, short bio, social profiles, and contact email.
 
 ## Contact
 
-travis@travismurdock.com
+- Email: travis@travismurdock.com
+- iMessage Contact Key Verification public code: APKTIDVmJDdE9Djh-FxpkTLvSoaRn_M_kJhjlB7lWUcfUUO_S0_A
 
 ## Profiles
 
 - LinkedIn: https://www.linkedin.com/in/travismurdock/
 - X (Twitter): https://x.com/travismurdock
 - GitHub: https://github.com/travisrmurdock
+- Facebook: https://facebook.com/travismurdock
 
 ## Identity
 
-Structured `Person` data is embedded as JSON-LD in the homepage `<head>` for machine-readable identity.
+Structured `Person` data (schema.org JSON-LD) is embedded in the homepage `<head>` for machine-readable identity, including `jobTitle`, `worksFor`, `knowsAbout`, and verified `sameAs` profile links.

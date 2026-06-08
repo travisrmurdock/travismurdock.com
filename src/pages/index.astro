@@ -3,6 +3,76 @@ import { Image } from 'astro:assets';
 import logo from '../assets/logo.png';
 
 const email = 'travis@travismurdock.com';
+const imessageKey = 'APKTIDVmJDdE9Djh-FxpkTLvSoaRn_M_kJhjlB7lWUcfUUO_S0_A';
+
+const socials = [
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/travismurdock/',
+    path: 'M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.79-1.75-1.76s.78-1.75 1.75-1.75 1.75.78 1.75 1.75-.78 1.76-1.75 1.76zm13.5 12.27h-3v-5.6c0-3.37-4-3.12-4 0v5.6h-3v-11h3v1.76c1.4-2.58 7-2.78 7 2.46v6.78z'
+  },
+  {
+    name: 'Facebook',
+    href: 'https://facebook.com/travismurdock',
+    path: 'M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z'
+  },
+  {
+    name: 'X',
+    href: 'https://x.com/travismurdock',
+    path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'
+  },
+  {
+    name: 'GitHub',
+    href: 'https://github.com/travisrmurdock',
+    path: 'M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'
+  }
+];
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://travismurdock.com/#person",
+  "name": "Travis Murdock",
+  "givenName": "Travis",
+  "familyName": "Murdock",
+  "url": "https://travismurdock.com/",
+  "mainEntityOfPage": "https://travismurdock.com/",
+  "image": "https://travismurdock.com/og-image.png",
+  "email": "mailto:travis@travismurdock.com",
+  "description": "Head of Go-To-Market at CopilotKit. Storyteller and Builder.",
+  "jobTitle": "Head of Go-To-Market",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "CopilotKit",
+    "url": "https://copilotkit.ai"
+  },
+  "knowsAbout": [
+    "AI copilots and agents",
+    "Go-to-market strategy",
+    "Founder-led sales",
+    "Developer-focused B2B software",
+    "Open source software",
+    "Startup mentorship"
+  ],
+  "knowsLanguage": "en",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Seattle",
+    "addressRegion": "WA",
+    "addressCountry": "US"
+  },
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "iMessage Contact Key Verification public code",
+    "value": imessageKey
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/travismurdock/",
+    "https://x.com/travismurdock",
+    "https://github.com/travisrmurdock",
+    "https://facebook.com/travismurdock"
+  ]
+};
 ---
 
 <html lang="en">
@@ -11,14 +81,14 @@ const email = 'travis@travismurdock.com';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>Travis Murdock</title>
-    <meta name="description" content="Travis Murdock — Storyteller and Builder. Head of GTM at CopilotKit." />
+    <meta name="description" content="Travis Murdock — Head of Go-To-Market at CopilotKit. Storyteller and Builder." />
     <meta name="author" content="Travis Murdock" />
     <meta name="creator" content="Travis Murdock" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
 
     <meta property="og:title" content="Travis Murdock" />
-    <meta property="og:description" content="Storyteller and Builder. Head of GTM at CopilotKit." />
+    <meta property="og:description" content="Head of Go-To-Market at CopilotKit. Storyteller and Builder." />
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://travismurdock.com/" />
     <meta property="og:site_name" content="Travis Murdock" />
@@ -33,7 +103,7 @@ const email = 'travis@travismurdock.com';
     <meta name="twitter:site" content="@travismurdock" />
     <meta name="twitter:creator" content="@travismurdock" />
     <meta name="twitter:title" content="Travis Murdock" />
-    <meta name="twitter:description" content="Storyteller and Builder. Head of GTM at CopilotKit." />
+    <meta name="twitter:description" content="Head of Go-To-Market at CopilotKit. Storyteller and Builder." />
     <meta name="twitter:image" content="https://travismurdock.com/og-image.png" />
     <meta name="twitter:image:alt" content="Travis Murdock — Storyteller and Builder" />
 
@@ -47,28 +117,7 @@ const email = 'travis@travismurdock.com';
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Travis Murdock",
-      "givenName": "Travis",
-      "familyName": "Murdock",
-      "url": "https://travismurdock.com/",
-      "image": "https://travismurdock.com/og-image.png",
-      "email": "mailto:travis@travismurdock.com",
-      "description": "Storyteller and Builder. Head of GTM at CopilotKit.",
-      "jobTitle": "Head of GTM",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "CopilotKit",
-        "url": "https://copilotkit.ai"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/in/travismurdock/",
-        "https://x.com/travismurdock",
-        "https://github.com/travisrmurdock"
-      ]
-    })} />
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   </head>
   <body>
     <main>
@@ -83,7 +132,37 @@ const email = 'travis@travismurdock.com';
         format="webp"
         class="logo"
       />
+
+      <p class="bio">
+        Head of Go-To-Market at <a href="https://copilotkit.ai" rel="external">CopilotKit</a> &mdash;
+        the open-source framework engineers use to build in-app AI copilots and agents.
+        Lead mentor at Techstars Seattle. Based in the Greater Seattle Area.
+      </p>
+
+      <ul class="socials" aria-label="Social profiles">
+        {socials.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              rel="me noopener"
+              target="_blank"
+              aria-label={s.name}
+              title={s.name}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d={s.path} fill="currentColor" />
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+
       <a class="email" href={`mailto:${email}`}>{email}</a>
+
+      <details class="imessage">
+        <summary>iMessage Contact Key</summary>
+        <code>{imessageKey}</code>
+      </details>
     </main>
   </body>
 </html>
@@ -93,6 +172,7 @@ const email = 'travis@travismurdock.com';
     color-scheme: light;
     --ink: #111;
     --muted: #555;
+    --faint: #888;
   }
 
   *,
@@ -132,7 +212,7 @@ const email = 'travis@travismurdock.com';
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: clamp(1.5rem, 4vw, 3rem);
+    gap: clamp(1.25rem, 3.5vw, 2.25rem);
     padding: 2rem 1.25rem;
   }
 
@@ -140,6 +220,59 @@ const email = 'travis@travismurdock.com';
     width: 100%;
     max-width: 800px;
     height: auto;
+    display: block;
+  }
+
+  .bio {
+    max-width: 38rem;
+    margin: 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    line-height: 1.55;
+  }
+
+  .bio a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 150ms ease;
+  }
+
+  .bio a:hover,
+  .bio a:focus-visible {
+    color: var(--ink);
+  }
+
+  .socials {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .socials a {
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: color 150ms ease, transform 150ms ease;
+  }
+
+  .socials a:hover,
+  .socials a:focus-visible {
+    color: var(--ink);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .socials svg {
+    width: 22px;
+    height: 22px;
     display: block;
   }
 
@@ -159,11 +292,44 @@ const email = 'travis@travismurdock.com';
     outline: none;
   }
 
+  .imessage {
+    font-size: 0.78rem;
+    color: var(--faint);
+    max-width: 38rem;
+    text-align: center;
+  }
+
+  .imessage summary {
+    cursor: pointer;
+    list-style: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  .imessage summary::-webkit-details-marker { display: none; }
+
+  .imessage summary:hover,
+  .imessage[open] summary {
+    color: var(--muted);
+  }
+
+  .imessage code {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    word-break: break-all;
+    user-select: all;
+    color: var(--muted);
+  }
+
   @media (prefers-color-scheme: dark) {
     :root {
       color-scheme: dark;
       --ink: #f4f4f4;
       --muted: #b6b6b6;
+      --faint: #777;
     }
     html,
     body {
